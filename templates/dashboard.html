@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-sm">
+  <h2 class="text-center mb-4">Bem-vindo(a), {{ session['usuario'] }}</h2>
+
+  <div class="row g-4">
+
+    <!-- Total de Itens -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow text-center h-100">
+        <div class="card-body">
+          <h5 class="card-title">Itens no Estoque</h5>
+          <h1 class="display-5 text-primary">{{ total }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estoque Baixo -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow text-center h-100">
+        <div class="card-body">
+          <h5 class="card-title text-danger">Estoque Baixo</h5>
+          <h2 class="text-danger">{{ baixos|length }}</h2>
+          <button class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#modalEstoque">Ver detalhes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Movimentações Recentes -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow text-center h-100">
+        <div class="card-body">
+          <h5 class="card-title text-warning">Movimentações</h5>
+          <h2 class="text-warning">{{ recentes|length }}</h2>
+          <button class="btn btn-outline-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#modalMovimentacoes">Ver detalhes</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Estoque Baixo -->
+<div class="modal fade" id="modalEstoque" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable modal-sm">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Itens com Estoque Baixo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body small">
+        {% for item in baixos %}
+          <p class="mb-1">{{ item[1] }} — <strong>{{ item[6] }}</strong> unidade(s)</p>
+        {% else %}
+          <p class="text-muted">Nenhum item com estoque baixo.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Movimentações -->
+<div class="modal fade" id="modalMovimentacoes" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable modal-sm">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title">Movimentações Recentes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body small">
+        {% for mov in recentes %}
+          <p class="mb-1"><strong>{{ mov[2] }}</strong> de {{ mov[3] }}<br><small>{{ mov[4] }} - {{ mov[1] }}</small></p>
+        {% else %}
+          <p class="text-muted">Nenhuma movimentação recente.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

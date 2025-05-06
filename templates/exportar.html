@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Exportar{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+  <h2 class="mb-4 text-danger"><i class="bi bi-file-earmark-pdf"></i> Exportar para PDF</h2>
+  <div class="alert alert-info w-75 mx-auto" role="alert">
+    O download do arquivo <strong>PDF</strong> contendo os itens cadastrados, incluindo nome, patrimônio, modelo, categoria, local, subcomponentes e quantidade, será iniciado automaticamente.
+    Caso isso não ocorra, verifique se o navegador está bloqueando o pop-up ou
+    <a href="/exportar" class="alert-link">clique aqui para baixar manualmente</a>.
+  </div>
+</div>
+{% endblock %}

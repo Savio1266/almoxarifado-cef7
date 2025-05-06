@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Visualizar Item{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Detalhes do Item</h2>
+
+<div class="card shadow-sm mb-5">
+  <div class="row g-0">
+    <div class="col-md-4">
+      {% if item[7] %}
+        <img src="{{ url_for('static', filename=item[7].replace('static/', '')) }}" class="img-fluid rounded-start" alt="Imagem do item">
+      {% else %}
+        <div class="p-5 text-center text-muted">Sem imagem</div>
+      {% endif %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h4 class="card-title mb-3">{{ item[1] }}</h4>
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item"><strong>Modelo:</strong> {{ item[3] or 'Não informado' }}</li>
+          <li class="list-group-item"><strong>Patrimônio:</strong> {{ item[2] or 'Não informado' }}</li>
+          <li class="list-group-item"><strong>Categoria:</strong> {{ item[4] or 'Não informada' }}</li>
+          <li class="list-group-item"><strong>Subcomponentes:</strong> {{ item[5] or 'Nenhum' }}</li>
+          <li class="list-group-item"><strong>Quantidade Atual:</strong> {{ item[6] }}</li>
+          <li class="list-group-item"><strong>Descrição:</strong> {{ item[8] or 'Não informada' }}</li>
+          <li class="list-group-item"><strong>Local:</strong> {{ item[9] or 'Não informado' }}</li>
+        </ul>
+
+        <div class="d-flex flex-wrap gap-2">
+          <a href="{{ url_for('registrar_entrada', id=item[0]) }}" class="btn btn-success">Registrar Entrada</a>
+          <a href="{{ url_for('registrar_saida', id=item[0]) }}" class="btn btn-danger">Registrar Saída</a>
+          <a href="{{ url_for('editar', id=item[0]) }}" class="btn btn-warning">Editar</a>
+          <a href="{{ url_for('excluir', id=item[0]) }}" class="btn btn-outline-danger" onclick="return confirm('Deseja excluir este item?')">Excluir</a>
+          <a href="{{ url_for('buscar_item') }}" class="btn btn-secondary">Voltar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-lg border-0">
+      <div class="card-body p-4">
+        <h3 class="text-center mb-4">Acesso ao Sistema</h3>
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label">Nome de Usuário</label>
+            <input type="text" name="nome" class="form-control" placeholder="Digite seu nome" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Senha</label>
+            <input type="password" name="senha" class="form-control" placeholder="Digite sua senha" required>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Entrar</button>
+            <a href="{{ url_for('cadastro') }}" class="btn btn-outline-secondary">Cadastrar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

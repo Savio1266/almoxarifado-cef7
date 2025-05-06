@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Editar Item{% endblock %}
+
+{% block content %}
+<h2 class="mb-4"><i class="bi bi-pencil-square"></i> Editar Item</h2>
+
+<form method="POST" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Nome</label>
+    <input type="text" name="nome" value="{{ item[1] }}" class="form-control" required>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Número de Patrimônio</label>
+    <input type="text" name="patrimonio" value="{{ item[2] }}" class="form-control">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Modelo</label>
+    <input type="text" name="modelo" value="{{ item[3] }}" class="form-control">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Categoria</label>
+    <select name="categoria" class="form-select" required>
+      {% set categorias = [
+        "Material de Escritório", "Material de Informática", "Material de Limpeza", "Material de Cozinha",
+        "Mantimentos / Gêneros Alimentícios", "Material de Papelaria", "Equipamento Escolar / Mobiliário",
+        "Material de Construção / Manutenção", "Equipamentos de Segurança (EPI)", "Outros"
+      ] %}
+      {% for cat in categorias %}
+      <option value="{{ cat }}" {% if item[4] == cat %}selected{% endif %}>{{ cat }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Subcomponentes (opcional)</label>
+    <input type="text" name="subitens" value="{{ item[5] }}" class="form-control">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Quantidade</label>
+    <input type="number" name="quantidade" value="{{ item[6] }}" class="form-control" min="1">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Local</label>
+    <input type="text" name="local" value="{{ item[9] if item|length > 9 else '' }}" class="form-control" placeholder="Ex: Almoxarifado, Sala A3...">
+  </div>
+
+  <div class="col-md-12">
+    <label class="form-label">Descrição (opcional)</label>
+    <textarea name="descricao" class="form-control" rows="3">{{ item[8] }}</textarea>
+  </div>
+
+  <div class="col-md-12">
+    <label for="imagem" class="form-label">Nova Imagem (opcional)</label>
+    <input type="file" id="imagem" name="imagem" accept="image/*" class="form-control">
+    <small class="form-text text-muted">Você pode atualizar a imagem atual com uma nova foto ou arquivo.</small>
+  </div>
+
+  <div class="col-12 d-flex justify-content-between">
+    <a href="{{ url_for('visualizar', id=item[0]) }}" class="btn btn-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-success">
+      <i class="bi bi-save2"></i> Salvar Alterações
+    </button>
+  </div>
+</form>
+{% endblock %}

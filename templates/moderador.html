@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Painel do Moderador{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Usuários Pendentes</h2>
+<ul class="list-group mb-5">
+  {% for id, nome in pendentes %}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    {{ nome }}
+    <span class="d-flex gap-2">
+      <a href="/aprovar/{{ id }}" class="btn btn-sm btn-success">Aprovar</a>
+      <a href="/rejeitar/{{ id }}" class="btn btn-sm btn-danger">Rejeitar</a>
+    </span>
+  </li>
+  {% else %}
+  <li class="list-group-item text-muted">Nenhum usuário pendente.</li>
+  {% endfor %}
+</ul>
+
+<h2 class="mb-4">Usuários Aprovados</h2>
+<ul class="list-group mb-5">
+  {% for id, nome in cadastrados %}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    {{ nome }}
+    <a href="/excluir_usuario/{{ id }}" class="btn btn-sm btn-outline-danger">Excluir</a>
+  </li>
+  {% else %}
+  <li class="list-group-item text-muted">Nenhum usuário cadastrado.</li>
+  {% endfor %}
+</ul>
+
+<a href="/resetar_banco" class="btn btn-danger mt-3">Limpar banco de dados</a>
+{% endblock %}

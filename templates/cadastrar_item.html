@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Cadastrar Item{% endblock %}
+
+{% block content %}
+<h2 class="mb-4"><i class="bi bi-plus-square"></i> Cadastrar Novo Item</h2>
+
+<form method="POST" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-6">
+    <input type="text" name="nome" placeholder="Nome do item" class="form-control" required>
+  </div>
+
+  <div class="col-md-6">
+    <input type="text" name="patrimonio" placeholder="Número de patrimônio (se houver)" class="form-control">
+  </div>
+
+  <div class="col-md-6">
+    <input type="text" name="modelo" placeholder="Modelo (marca, referência etc.)" class="form-control">
+  </div>
+
+  <div class="col-md-6">
+    <select name="categoria" class="form-select" required>
+      <option value="" disabled selected>Selecione a categoria</option>
+      <option value="Material de Escritório">Material de Escritório</option>
+      <option value="Material de Informática">Material de Informática</option>
+      <option value="Material de Limpeza">Material de Limpeza</option>
+      <option value="Material de Cozinha">Material de Cozinha</option>
+      <option value="Mantimentos / Gêneros Alimentícios">Mantimentos / Gêneros Alimentícios</option>
+      <option value="Material de Papelaria">Material de Papelaria</option>
+      <option value="Equipamento Escolar / Mobiliário">Equipamento Escolar / Mobiliário</option>
+      <option value="Material de Construção / Manutenção">Material de Construção / Manutenção</option>
+      <option value="Equipamentos de Segurança (EPI)">Equipamentos de Segurança (EPI)</option>
+      <option value="Outros">Outros</option>
+    </select>
+  </div>
+
+  <div class="col-md-12">
+    <input type="text" name="local" placeholder="Local onde está armazenado (ex: Almoxarifado, Sala 01)" class="form-control" required>
+  </div>
+
+  <div class="col-md-12">
+    <input type="text" name="subitens" placeholder="Subcomponentes (opcional)" class="form-control">
+  </div>
+
+  <div class="col-md-4">
+    <input type="number" name="quantidade" placeholder="Quantidade" class="form-control" min="1" required>
+  </div>
+
+  <div class="col-md-8">
+    <textarea name="descricao" placeholder="Descrição detalhada (opcional)" class="form-control" rows="2"></textarea>
+  </div>
+
+  <div class="col-md-12">
+    <label for="imagem" class="form-label">Imagem do item (opcional)</label>
+    <input type="file" id="imagem" name="imagem" accept="image/*" class="form-control">
+    <small class="form-text text-muted">Tire uma foto ou selecione da galeria.</small>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-success w-100">
+      <i class="bi bi-check2-circle"></i> Cadastrar Item
+    </button>
+  </div>
+</form>
+{% endblock %}
